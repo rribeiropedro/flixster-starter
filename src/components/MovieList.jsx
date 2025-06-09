@@ -48,41 +48,43 @@ const MovieList = () => {
     }, [])
 
     return (
-        <main className="main-container">
-            <div className="movie-list-container">
-                {loading ? (
-                    <>
-                        <h1>jij</h1>
-                    </>
-                ) : (
-                    <>
-                        {firstMovieList.map((item) => (
-                            <MovieCard 
-                                key={item.id}
-                                id={item.id}
-                                movieTitle={item.title} 
-                                moviePoster={item.poster_path}
-                                movieRating={item.vote_average}
-                            />
-                        ))}
-                        {secondMovieList && loadSecondPage ? (
-                            <>
-                                {secondMovieList.map((item) => (
-                                    <MovieCard 
-                                        key={item.id}
-                                        id={item.id}
-                                        movieTitle={item.title} 
-                                        moviePoster={item.poster_path}
-                                        movieRating={item.vote_average}
-                                    />
-                                ))}
-                            </>
-                        ) : []}
-                    </>
-                )}
-            </div>
-            {!loadSecondPage ? <button onClick={() => setLoadSecondPage(true)}>Load More</button> : []}
-        </main>
+        <>
+            <section className="movie-list-container">
+                <div className="movie-grid-container">
+                    {loading ? (
+                        <>
+                            <h1>jij</h1>
+                        </>
+                    ) : (
+                        <>
+                            {firstMovieList.map((item) => (
+                                <MovieCard 
+                                    key={item.id}
+                                    id={item.id}
+                                    movieTitle={item.title} 
+                                    moviePoster={item.poster_path}
+                                    movieRating={item.vote_average}
+                                />
+                            ))}
+                            {secondMovieList && loadSecondPage ? (
+                                <>
+                                    {secondMovieList.map((item) => (
+                                        <MovieCard 
+                                            key={item.id}
+                                            id={item.id}
+                                            movieTitle={item.title} 
+                                            moviePoster={item.poster_path}
+                                            movieRating={item.vote_average}
+                                        />
+                                    ))}
+                                </>
+                            ) : []}
+                        </>
+                    )}
+                </div>
+                {!loadSecondPage ? <button onClick={() => setLoadSecondPage(true)}>Load More</button> : []}
+            </section>
+        </>
     )
 }
 

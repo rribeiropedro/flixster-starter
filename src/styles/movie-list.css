@@ -1,10 +1,10 @@
-.main-container {
+.movie-list-container {
     padding: 50px;
     font-family: 'Lato', sans-serif;
     background-color: #ececec;
 }
 
-.movie-list-container {
+.movie-grid-container {
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -14,7 +14,7 @@
     column-gap: 80px;
 }
 
-.main-container button {
+.movie-list-container button {
     margin-top: 40px;
     font-size: 20px;
     padding: 10px 20px;
@@ -24,6 +24,6 @@
     transition: transform 0.3s;
 }
 
-.main-container button:hover {
+.movie-list-container button:hover {
     transform: scale(1.1);
 }
