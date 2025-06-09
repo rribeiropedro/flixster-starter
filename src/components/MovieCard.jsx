@@ -11,8 +11,10 @@ const MovieCard = (props) => {
     return (
         <div className="card-container">
             <img src={posterUrl} />
-            <h1>{props.movieTitle}</h1>
-            <h3>{props.movieRating}</h3>
+            <div className="card-info">
+                <h1>{props.movieTitle}</h1>
+                <h4>Rating: {Number(props.movieRating.toFixed(1))}</h4>
+            </div>
         </div>
     )
 }

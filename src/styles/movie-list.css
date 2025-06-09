@@ -1,0 +1,12 @@
+.movie-list-container {
+    width: 100%;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 40px;
+    column-gap: 80px;
+    background-color: #ececec;
+    font-family: 'Lato', sans-serif;
+}
