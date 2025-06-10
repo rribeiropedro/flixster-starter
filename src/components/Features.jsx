@@ -20,12 +20,13 @@ const Features = ({ onQuery, onNowButton }) => {
     
     return (
         <div className="features-container">
-            <div>
-                <button onClick={handleNowPlayingButton}>Now Playing</button>
-                <input type="text" value={searchQuery} onChange={handleSearchChange} placeholder="Search" />
-                <button onClick={handleQuery}>Submit</button>
+            <div className="searching-container">
+                <button className="now-playing-btn" onClick={handleNowPlayingButton}>Now Playing</button>
+                <h3>Search:</h3>
+                <input className="input-query" type="text" value={searchQuery} onChange={handleSearchChange} placeholder="Search" />
+                <button className="submit-query" onClick={handleQuery}>Submit</button>
             </div>
-            <select>
+            <select className="drop-down">
                 <option disabled selected>Sort By</option>
                 <option></option>
             </select>
