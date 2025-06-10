@@ -1,9 +1,18 @@
 import React, { useState } from "react"
 import '../styles/features.css'
 
-const Features = () => {
+const Features = ({ onQuery, onNowButton }) => {
     
     const [searchQuery, setSearchQuery] = useState('')
+
+    const handleQuery = () => {
+        if (searchQuery)
+            onQuery(searchQuery)
+    }
+
+    const handleNowPlayingButton = () => {
+        onNowButton()
+    }
 
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value)
@@ -12,8 +21,9 @@ const Features = () => {
     return (
         <div className="features-container">
             <div>
-                <button>Now Playing</button>
+                <button onClick={handleNowPlayingButton}>Now Playing</button>
                 <input type="text" value={searchQuery} onChange={handleSearchChange} placeholder="Search" />
+                <button onClick={handleQuery}>Submit</button>
             </div>
             <select>
                 <option disabled selected>Sort By</option>
