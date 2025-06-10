@@ -8,6 +8,15 @@ const MovieList = ({ movieList }) => {
     const [displayModal, setDispalyModal] = useState(false)
     const [modalMovie, setModalMovie] = useState()
 
+    /**
+     * This function takes the id of the movie and pulls in all
+     * the information possible from the api for the requested movie.
+     * Additionally, this api call toggles the modal to display
+     * additional information.
+     * 
+     * @param {*} movieID - The id from the movie which was pulled
+     * from the key of the card declared when it was mapped out.
+     */
     const displayMovieById = async (movieID) => {
         const apiKey = import.meta.env.VITE_APP_API_KEY
         const url = `https://api.themoviedb.org/3/movie/${movieID}`

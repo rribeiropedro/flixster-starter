@@ -3,7 +3,6 @@ import MovieList from "./MovieList"
 import Features from "./Features"
 
 const Main = () => {
-
     const [queryPageCount, setQueryPageCount] = useState(0)
     const [nowPlayingPageCount, setNowPlayingPageCount] = useState(0)
     const [previousQuery, setPreviousQuery] = useState('')
@@ -11,6 +10,14 @@ const Main = () => {
     const [loading, setLoading] = useState(true)
     const [resetValue, setResetValue] = useState(false)
     
+    /**
+     * This functions calls the TMDB API for the desired request.
+     * It takes in the desired url as an argument and outputs the 
+     * results from the json.
+     * 
+     * @param {*} url - The desired url for the API call.
+     * @returns {Object} The results attribute of the json response.
+     */
     const callMovieAPI = async (url) => {
         const apiKey = import.meta.env.VITE_APP_API_KEY
         const options = {
@@ -24,7 +31,6 @@ const Main = () => {
             .then(res => res.json())
             .then(json => {
                 setLoading(false)
-                console.log(json.results)
                 return json.results
             })
             .catch(err => {
@@ -34,6 +40,14 @@ const Main = () => {
             })
     }
 
+    /**
+     * This function takes in a query from the search bar in Features.jsx
+     * and appends it to the url for the API call. Additionally, page count
+     * is properly updated for both Now Playing and Query.
+     * 
+     * @param {*} query - Query from the search bar that is appendeded
+     * to the url.
+     */
     const updateQueryUrl = async (query) => {
         const queryURL = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${queryPageCount + 1}`
         setQueryPageCount(prev => prev + 1)
@@ -51,6 +65,10 @@ const Main = () => {
             })
     }
 
+    /**
+     * This function creates a new url for the Now Playing API call
+     * and takes into account the current page state.
+     */
     const loadNowPlaying = async () => {
         if (previousQuery) {
             setPreviousQuery('')
@@ -88,6 +106,14 @@ const Main = () => {
             })
     }, [])
 
+    /**
+     * This function takes a sort type and and creates a deep copy
+     * of the currentMovieList state, sorts it based of the sort type,
+     * and stores it in the state.
+     * 
+     * @param {*} sortType - The sort type passed from Features.jsx 
+     * select and options tags.
+     */
     const sortMovies = (sortType) => {
         setResetValue(false)
         if (sortType === "date") {
