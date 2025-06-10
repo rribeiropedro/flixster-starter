@@ -23,6 +23,7 @@ const Main = () => {
             .then(res => res.json())
             .then(json => {
                 setLoading(false)
+                console.log(json.results)
                 return json.results
             })
             .catch(err => {

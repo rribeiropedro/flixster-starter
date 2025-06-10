@@ -5,11 +5,12 @@ const MovieCard = (props) => {
 
     const posterUrl = `https://image.tmdb.org/t/p/w500${props.moviePoster}`;
 
-    useEffect(() => {
-    }, [])
+    const toggleModal = () => {
+        props.displayModalById(props.id)
+    }
 
     return (
-        <div className="card-container">
+        <div onClick={toggleModal} className="card-container">
             <img src={posterUrl} />
             <div className="card-info">
                 <h1>{props.movieTitle}</h1>
