@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import '../styles/features.css'
 
-const Features = ({ onQuery, onNowButton }) => {
+const Features = ({ sortList, resetValue, onQuery, onNowButton }) => {
     
     const [searchQuery, setSearchQuery] = useState('')
+    const [sortValue, setSortValue] = useState('')
 
     const handleQuery = () => {
         if (searchQuery)
@@ -17,6 +18,16 @@ const Features = ({ onQuery, onNowButton }) => {
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value)
     }
+
+    const handleSort = (event) => {
+        setSortValue(event.target.value)
+        sortList(event.target.value)
+    }
+
+    useEffect(() => {
+        if (resetValue)
+            setSortValue('')
+    }, [resetValue])
     
     return (
         <div className="features-container">
@@ -26,9 +37,11 @@ const Features = ({ onQuery, onNowButton }) => {
                 <input className="input-query" type="text" value={searchQuery} onChange={handleSearchChange} placeholder="Search" />
                 <button className="submit-query" onClick={handleQuery}>Submit</button>
             </div>
-            <select className="drop-down">
-                <option disabled selected>Sort By</option>
-                <option></option>
+            <select value={sortValue} onChange={handleSort} className="drop-down">
+                <option value="" disabled selected>Sort By</option>
+                <option value="alphabetical">Alphabetical</option>
+                <option value="date">Date</option>
+                <option value="rating">Rating</option>
             </select>
         </div>
     )

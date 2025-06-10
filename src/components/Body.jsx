@@ -9,6 +9,7 @@ const Main = () => {
     const [previousQuery, setPreviousQuery] = useState('')
     const [currentMovieList, setCurrentMovieList] = useState()
     const [loading, setLoading] = useState(true)
+    const [resetValue, setResetValue] = useState(false)
     
     const callMovieAPI = async (url) => {
         const apiKey = import.meta.env.VITE_APP_API_KEY
@@ -43,6 +44,7 @@ const Main = () => {
                     setCurrentMovieList(result)
                     setPreviousQuery(query)
                     setNowPlayingPageCount(0)
+                    setResetValue(true)
                 } else {
                     setCurrentMovieList([...currentMovieList, ...result])
                 }
@@ -52,6 +54,7 @@ const Main = () => {
     const loadNowPlaying = async () => {
         if (previousQuery) {
             setPreviousQuery('')
+            setResetValue(true)
         }
         
         const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${nowPlayingPageCount + 1}`
@@ -85,9 +88,23 @@ const Main = () => {
             })
     }, [])
 
+    const sortMovies = (sortType) => {
+        setResetValue(false)
+        if (sortType === "date") {
+            const newList = [...currentMovieList].sort((a, b) => new Date(b.release_date) - new Date(a.release_date))
+            setCurrentMovieList(newList)
+        } else if (sortType === "alphabetical") {
+            const newList = [...currentMovieList].sort((a, b) => b.title.localeCompare(a.title))
+            setCurrentMovieList(newList)
+        } else if (sortType === "rating") {
+            const newList = [...currentMovieList].sort((a, b) => b.vote_average - a.vote_average)
+            setCurrentMovieList(newList)
+        }
+    }
+
     return (
         <>
-            <Features onQuery={updateQueryUrl} onNowButton={loadNowPlaying}/>
+            <Features sortList={sortMovies} resetValue={resetValue} onQuery={updateQueryUrl} onNowButton={loadNowPlaying}/>
             {currentMovieList ? <MovieList movieList={currentMovieList}/> : []}
             <button onClick={getNextPage}>Load More</button>
         </>
