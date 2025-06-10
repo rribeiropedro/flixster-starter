@@ -16,7 +16,7 @@
 .modal-overlay {
    position: fixed; 
    z-index: 1; 
-   padding: 12% 10%;
+   padding: 12% 20%;
    left: 0;
    top: 0;
    width: 100%;
@@ -26,15 +26,72 @@
    overflow: auto;
 }
 
+.close-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
 .modal-card {
-    padding: 50px;
-    background-color: white;
+    padding: 30px 50px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    font-family: 'Lato', sans-serif;
+}
+
+.modal-content {
+    display: flex;
+    gap: 40px;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: column;
+    background-color: #eeeeee;
+    box-shadow: 6px 3px 3px #e2dfdf;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+    gap: 15px;
     border-radius: 10px;
 }
 
+.modal-content img {
+    width: 300px;
+    height: 444px;
+    border-radius: 10px;
+}
+
+.modal-info h1 {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-weight: 700;
+    font-size: 45px;
+}
+
+.modal-info h3 {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.modal-info p {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 18px;
+}
+
 .modal-genres {
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+    justify-content: flex-start;
+    font-size: 20px;
+    font-weight: 400;
+    gap: 5px;
 }

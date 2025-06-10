@@ -32,16 +32,19 @@ const MovieList = ({ movieList }) => {
             {displayModal ? 
                 <div className="modal-overlay">
                     <div className="modal-card">
-                        <span onClick={() => setDispalyModal(false)} className="close">&times;</span>
-                        <h1>{modalMovie.original_title}</h1>
-                        <img src={`https://image.tmdb.org/t/p/w500${modalMovie.poster_path}`}/>
-                        <h3>{modalMovie.release_date}</h3>
-                        <div className="modal-genres">
-                            {modalMovie.genres.map((genre) => (
-                                <h4 key={genre.id}>{genre.name}</h4>
-                            ))}
+                        <div className="close-container">
+                            <span onClick={() => setDispalyModal(false)} className="close">&times;</span>
                         </div>
-                        <p>{modalMovie.overview}</p>
+                        <div className="modal-content">
+                            <img src={`https://image.tmdb.org/t/p/w500${modalMovie.poster_path}`}/>
+                            <div className="modal-info">
+                                <h1>{modalMovie.original_title}</h1>
+                                <h3>Release Date: {modalMovie.release_date}</h3>
+                                <h4 className="modal-genres"> Genres: {modalMovie.genres.map((genre) => (<span>{genre.name};</span>))}
+                                </h4>
+                                <p>Overview: <br />{modalMovie.overview}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             : []}

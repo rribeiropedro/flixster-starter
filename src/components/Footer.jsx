@@ -1,9 +1,16 @@
 import React from "react"
-import '../styles/footer.css'
 
 const Footer = () => {
     return (
-        <footer>
+        <footer style={{
+            padding: '20px',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            fontFamily: "'Lato', sans-serif",
+            backgroundColor: '#1772c1',
+            color: 'white'
+        }}>
             <h1>© 2025 Flixster</h1>
         </footer>
     )

@@ -103,11 +103,23 @@ const Main = () => {
     }
 
     return (
-        <>
+        <div style={{backgroundColor: '#ececec'}}>
             <Features sortList={sortMovies} resetValue={resetValue} onQuery={updateQueryUrl} onNowButton={loadNowPlaying}/>
             {currentMovieList ? <MovieList movieList={currentMovieList}/> : []}
-            <button onClick={getNextPage}>Load More</button>
-        </>
+            <button 
+                style={{
+                    padding: '8px 15px',
+                    marginRight: '40px',
+                    color: 'black',
+                    backgroundColor: '#f2f2f2',
+                    borderRadius: '5px',
+                    marginBottom: '30px'
+                }}
+                onClick={getNextPage}
+            >
+                Load More
+            </button>
+        </div>
     )
 }
 
