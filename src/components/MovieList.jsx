@@ -7,6 +7,8 @@ const MovieList = ({ movieList }) => {
 
     const [displayModal, setDispalyModal] = useState(false)
     const [modalMovie, setModalMovie] = useState()
+    const [trailerURL, setTrailerURL] = useState()
+    const [toggleTrailer, setToggleTrailer] = useState(false)
 
     /**
      * This function takes the id of the movie and pulls in all
@@ -31,9 +33,32 @@ const MovieList = ({ movieList }) => {
             .then(res => res.json())
             .then(json => {
                 setModalMovie(json)
+                console.log(json)
                 setDispalyModal(true)
             })
             .catch(error => console.log(error))
+    }
+
+    const fetchTrailer = async () => {
+        const apiKey = import.meta.env.VITE_APP_API_KEY
+        const url = `https://api.themoviedb.org/3/movie/${modalMovie.id}/videos?language=en-US`
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${apiKey}`
+            }
+        }
+        fetch(url, options)
+            .then(res => res.json())
+            .then(json => {
+                const trailerList = json.results.filter((item) => item.type === "Trailer")
+                const url = `https://www.youtube.com/embed/${trailerList[0].key}`
+                setTrailerURL(url)
+                setToggleTrailer(true)
+            })
+            .catch(error => console.log(error))
+
     }
 
     return (
@@ -42,17 +67,37 @@ const MovieList = ({ movieList }) => {
                 <div className="modal-overlay">
                     <div className="modal-card">
                         <div className="close-container">
-                            <span onClick={() => setDispalyModal(false)} className="close">&times;</span>
+                            <span 
+                                onClick={() => {
+                                    setDispalyModal(false)
+                                    setToggleTrailer(false)
+                                }} 
+                                className="close">&times;
+                            </span>
                         </div>
                         <div className="modal-content">
-                            <img src={`https://image.tmdb.org/t/p/w500${modalMovie.poster_path}`}/>
-                            <div className="modal-info">
-                                <h1>{modalMovie.original_title}</h1>
-                                <h3>Release Date: {modalMovie.release_date}</h3>
-                                <h4 className="modal-genres"> Genres: {modalMovie.genres.map((genre) => (<span>{genre.name};</span>))}
-                                </h4>
-                                <p>Overview: <br />{modalMovie.overview}</p>
-                            </div>
+                            {toggleTrailer ? 
+                                <div style={{boxSizing: 'border-box', display: 'flex', flexDirection: 'column', width: '100%', gap: '20px'}}>
+                                    <iframe src={trailerURL}></iframe>
+                                    <button 
+                                        onClick={() => setToggleTrailer(false)}
+                                        style={{width: '25%'}}
+                                    >
+                                        Return
+                                    </button> 
+                                </div> : 
+                                <>
+                                    <img src={`https://image.tmdb.org/t/p/w500${modalMovie.poster_path}`}/>
+                                    <div className="modal-info">
+                                        <h1>{modalMovie.original_title}</h1>
+                                        <h3>Release Date: {modalMovie.release_date}</h3>
+                                        <h4 className="modal-genres"> Genres: {modalMovie.genres.map((genre) => (<span>{genre.name};</span>))}
+                                        </h4>
+                                        <p>Overview: <br />{modalMovie.overview}</p>
+                                        <button onClick={fetchTrailer}>Watch Trailer</button>
+                                    </div>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>

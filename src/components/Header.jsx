@@ -7,7 +7,7 @@ const Header = () => {
             display: 'flex',
             justifyContent: 'flex-start',
             alignItems: 'flex-start',
-            backgroundColor: '#1772c1',
+            backgroundColor: '#831010',
             fontFamily: "'Lato', sans-serif",
             fontSize: '20px',
             color: 'whitesmoke',

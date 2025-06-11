@@ -1,13 +1,12 @@
 .close {
     display: inline-block;
-    color: #aaa;
+    color: #ffffff;
     font-size: 28px;
     font-weight: bold;
     transition: transform 0.3s;
 }
 .close:hover,
 .close:focus {
-    color: black;
     text-decoration: none;
     cursor: pointer;
     transform: scale(1.05);
@@ -22,7 +21,7 @@
    width: 100%;
    height: 100%; 
    box-sizing: border-box;
-   background-color: rgba(0,0,0,0.4);
+   background-color: rgba(0,0,0,0.8);
    overflow: auto;
 }
 
@@ -35,9 +34,10 @@
 
 .modal-card {
     padding: 30px 50px;
-    background-color: whitesmoke;
+    background-color: #0e0e0e;
     border-radius: 10px;
     font-family: 'Lato', sans-serif;
+    border: 3px solid #831010;
 }
 
 .modal-content {
@@ -45,11 +45,27 @@
     gap: 40px;
 }
 
+
+.modal-content button {
+    margin-top: auto;
+    width: 40%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    background-color: #831010;
+}
+
+.modal-content button:hover {
+    background-color: #831010;
+    transform: scale(1.05);
+}
+
 .modal-info {
     display: flex;
     flex-direction: column;
-    background-color: #eeeeee;
-    box-shadow: 6px 3px 3px #e2dfdf;
+    background-color: #1a1a1a;
+    color: white;
     padding: 20px;
     box-sizing: border-box;
     overflow: auto;
@@ -61,6 +77,11 @@
     width: 300px;
     height: 444px;
     border-radius: 10px;
+}
+
+.modal-content iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
 }
 
 .modal-info h1 {
@@ -75,7 +96,7 @@
     padding: 0;
     margin: 0;
     text-align: left;
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 400;
 }
 
@@ -83,7 +104,7 @@
     padding: 0;
     margin: 0;
     text-align: left;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .modal-genres {
