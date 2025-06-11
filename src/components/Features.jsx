@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import Sidebar from "./Sidebar"
 import '../styles/features.css'
 
 const Features = ({ sortList, resetValue, onQuery, onNowButton }) => {
@@ -31,6 +32,7 @@ const Features = ({ sortList, resetValue, onQuery, onNowButton }) => {
     
     return (
         <div className="features-container">
+            <Sidebar />
             <div className="searching-container">
                 <button className="now-playing-btn" onClick={handleNowPlayingButton}>Now Playing</button>
                 <h3>Search:</h3>

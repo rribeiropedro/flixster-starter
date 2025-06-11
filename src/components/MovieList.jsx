@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import MovieCard from "./MovieCard"
+import Sidebar from "./Sidebar"
 import "../styles/movie-list.css"
 import "../styles/card-modal.css"
 
@@ -39,6 +40,12 @@ const MovieList = ({ movieList }) => {
             .catch(error => console.log(error))
     }
 
+    /**
+     * This function uses the id stored in the modalMovie state and
+     * fetches all videos related to the movie id. After fetching,
+     * it filters out any video not a trailer and stores the url of
+     * the first child trailer.
+     */
     const fetchTrailer = async () => {
         const apiKey = import.meta.env.VITE_APP_API_KEY
         const url = `https://api.themoviedb.org/3/movie/${modalMovie.id}/videos?language=en-US`
