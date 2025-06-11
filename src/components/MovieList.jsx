@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react"
 import MovieCard from "./MovieCard"
-import Sidebar from "./Sidebar"
 import "../styles/movie-list.css"
 import "../styles/card-modal.css"
 
-const MovieList = ({ movieList }) => {
+const MovieList = ({ movieList, addLiked, removeLiked, addWatched, removeWatched, likedList, watchedList }) => {
 
     const [displayModal, setDispalyModal] = useState(false)
     const [modalMovie, setModalMovie] = useState()
@@ -113,12 +112,18 @@ const MovieList = ({ movieList }) => {
                 <div className="movie-grid-container">
                     {movieList.map((item) => (
                         <MovieCard 
-                            displayModalById={displayMovieById}
                             key={item.id}
                             id={item.id}
                             movieTitle={item.title} 
                             moviePoster={item.poster_path}
                             movieRating={item.vote_average}
+                            displayModalById={displayMovieById}
+                            addLiked={addLiked} 
+                            removeLiked={removeLiked}
+                            addWatched={addWatched}
+                            removeWatched={removeWatched}
+                            isLiked={likedList.some(element => element.id === item.id)}
+                            isWatched={watchedList.some(element => element.id === item.id)}
                         />
                     ))}
                 </div>

@@ -7,13 +7,30 @@ import { faSquareCheck as faSquareCheckSolid } from '@fortawesome/free-solid-svg
 import "../styles/movie-card.css"
 
 const MovieCard = (props) => {
-
-    const [liked, setLiked] = useState(false)
-    const [watched, setWatched] = useState(false)
-    const posterUrl = `https://image.tmdb.org/t/p/w500${props.moviePoster}`;
+    const [liked, setLiked] = useState()
+    const [watched, setWatched] = useState()
+    const posterUrl = `https://image.tmdb.org/t/p/w500${props.moviePoster}`
 
     const toggleModal = () => {
         props.displayModalById(props.id)
+    }
+
+    const handleLike = (event) => {
+        event.stopPropagation()
+        liked ? props.removeLiked(props.id) : props.addLiked(
+            props.id,
+            props.movieTitle,
+            props.moviePoster)
+        setLiked(!liked)
+    }
+
+    const handleWatch = (event) => {
+        event.stopPropagation()
+        watched ? props.removeWatched(props.id) : props.addWatched(
+            props.id,
+            props.movieTitle,
+            props.moviePoster) 
+        setWatched(!liked)
     }
 
     return (
@@ -25,13 +42,9 @@ const MovieCard = (props) => {
                     <span>
                         Like:
                         <FontAwesomeIcon 
-                            style={liked ? {marginLeft: '5px', color: 'red'} : {marginLeft: '5px'}}
-                            icon={liked ? faHeartSolid : faHeartRegular} 
-                            onClick={event => {
-                                    event.stopPropagation()
-                                    setLiked(!liked)
-                                }
-                            }
+                            style={liked || props.isLiked ? {marginLeft: '5px', color: 'red'} : {marginLeft: '5px'}}
+                            icon={liked || props.isLiked ? faHeartSolid : faHeartRegular} 
+                            onClick={handleLike}
                         />
                     </span>
                 </div>
@@ -39,12 +52,9 @@ const MovieCard = (props) => {
                 <span>
                     Watched:
                     <FontAwesomeIcon 
-                        style={watched ? {marginLeft: '5px', color: 'green'} : {marginLeft: '5px'}}
-                        icon={watched ? faSquareCheckSolid : faSquareCheckRegular}
-                        onClick={event => {
-                            event.stopPropagation()
-                            setWatched(!watched)
-                        }}
+                        style={watched || props.isWatched ? {marginLeft: '5px', color: 'green'} : {marginLeft: '5px'}}
+                        icon={watched || props.isWatched ? faSquareCheckSolid : faSquareCheckRegular}
+                        onClick={handleWatch}
                     />
                 </span>
             </div>

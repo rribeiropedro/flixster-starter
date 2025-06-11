@@ -9,6 +9,17 @@ const Main = () => {
     const [currentMovieList, setCurrentMovieList] = useState()
     const [loading, setLoading] = useState(true)
     const [resetValue, setResetValue] = useState(false)
+    const [likedList, setLikedList] = useState([])
+    const [watchedList, setWatchedList] = useState([])
+
+    useEffect(() => {
+        const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${nowPlayingPageCount + 1}`
+        callMovieAPI(nowPlayingURL)
+            .then(results => {
+                console.log(results)
+                setCurrentMovieList(results)
+            })
+    }, [])
     
     /**
      * This functions calls the TMDB API for the desired request.
@@ -89,24 +100,6 @@ const Main = () => {
             })
     }
 
-    const getNextPage = async () => {
-        if (previousQuery != '') {
-            await updateQueryUrl(previousQuery)
-        }
-        else {
-            await loadNowPlaying()
-        }   
-    }
-
-    useEffect(() => {
-        const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${nowPlayingPageCount + 1}`
-        callMovieAPI(nowPlayingURL)
-            .then(results => {
-                console.log(results)
-                setCurrentMovieList(results)
-            })
-    }, [])
-
     /**
      * This function takes a sort type and and creates a deep copy
      * of the currentMovieList state, sorts it based of the sort type,
@@ -129,10 +122,63 @@ const Main = () => {
         }
     }
 
+    const getNextPage = async () => {
+        if (previousQuery != '') {
+            await updateQueryUrl(previousQuery)
+        }
+        else {
+            await loadNowPlaying()
+        }   
+    }
+
+    const addLiked = (id, title, poster) => {
+        setLikedList(likedList => [...likedList, {
+            id: id,
+            title: title,
+            poster: `https://image.tmdb.org/t/p/w500${poster}`
+        }])
+    }
+
+    const removeLiked = (id) => {
+        setLikedList(likedList =>
+            likedList.filter(curr => curr.id !== id)
+        )
+    }
+
+    const addWatched = (id, title, poster) => {
+        setWatchedList(watchedList => [...watchedList, {
+            id: id,
+            title: title,
+            poster: `https://image.tmdb.org/t/p/w500${poster}`
+        }])
+    }
+
+    const removeWatched = (movie) => {
+        setWatchedList(watchedList =>
+            watchedList.filter(curr => curr.id !== movie.id)
+        )
+    }
+
     return (
         <div style={{backgroundColor: '#ececec'}}>
-            <Features sortList={sortMovies} resetValue={resetValue} onQuery={updateQueryUrl} onNowButton={loadNowPlaying}/>
-            {currentMovieList ? <MovieList movieList={currentMovieList}/> : []}
+            <Features 
+                sortList={sortMovies}
+                resetValue={resetValue}
+                onQuery={updateQueryUrl}
+                onNowButton={loadNowPlaying}
+                likedList={likedList}
+                watchedList={watchedList}
+            />
+            {currentMovieList ? 
+                <MovieList 
+                    movieList={currentMovieList}
+                    addLiked={addLiked}
+                    removeLiked={removeLiked}
+                    addWatched={addWatched}
+                    removeWatched={removeWatched}
+                    likedList={likedList}
+                    watchedList={watchedList}
+                /> : []}
             <button 
                 style={{
                     padding: '8px 15px',
