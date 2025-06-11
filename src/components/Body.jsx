@@ -102,6 +102,7 @@ const Main = () => {
         const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${nowPlayingPageCount + 1}`
         callMovieAPI(nowPlayingURL)
             .then(results => {
+                console.log(results)
                 setCurrentMovieList(results)
             })
     }, [])
