@@ -30,7 +30,7 @@ const MovieCard = (props) => {
             props.id,
             props.movieTitle,
             props.moviePoster) 
-        setWatched(!liked)
+        setWatched(!watched)
     }
 
     return (

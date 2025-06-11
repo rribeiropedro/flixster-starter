@@ -153,9 +153,9 @@ const Main = () => {
         }])
     }
 
-    const removeWatched = (movie) => {
+    const removeWatched = (id) => {
         setWatchedList(watchedList =>
-            watchedList.filter(curr => curr.id !== movie.id)
+            watchedList.filter(curr => curr.id !== id)
         )
     }
 

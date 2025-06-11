@@ -5,12 +5,6 @@ import '../styles/sidebar.css'
 
 const Sidebar = ({likedList, watchedList}) => {
     const [toggleSideBar, setToggleSideBar] = useState(false)
-    const [liked, setLiked] = useState([])
-
-    useEffect(() => {
-        console.log(liked)
-        likedList ? setLiked(likedList) : []
-    }, [likedList])
 
     return (
         <>
@@ -25,16 +19,35 @@ const Sidebar = ({likedList, watchedList}) => {
             <div className={`sidebar-overlay ${toggleSideBar ? "open" : ""}`} onClick={() => setToggleSideBar(false)} />
             <aside className={`sidebar ${toggleSideBar ? "open" : ""}`}>
                 <button className="close-btn" onClick={() => setToggleSideBar(false)}>×</button>
-                <div>
-                    {liked && liked.map((item) => (
-                        <h1 style={{color: 'white'}}>{item.title}</h1>
-                    ))}
-                </div>
-                <div>
-                    {watchedList && watchedList.map((item) => (
-                        <h1 style={{color: 'white'}}>{item.title}</h1>
-                    ))}
-                </div>
+                {!likedList.length > 0 && !watchedList.length > 0 && <h1>No Movies Liked Or Watched</h1>}
+                {likedList.length > 0 && (
+                    <>
+                        <h1>Liked Videos</h1>
+                        <hr style={{marginBottom: '20px', width: '100%'}}/>
+                        <div className="list-container">
+                            {likedList.map((item) => (
+                                <div className="list-item">
+                                    <img src={item.poster}/>
+                                    <h1 style={{color: 'white'}}>{item.title}</h1>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
+                {watchedList.length > 0 && (
+                    <>
+                        <h1 style={{marginTop: '20px'}}>Watched Videos</h1>
+                        <hr style={{width: '100%'}}/>
+                        <div className="list-container">
+                            {watchedList.map((item) => (
+                                <div className="list-item">
+                                    <img src={item.poster}/>
+                                    <h1>{item.title}</h1>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
             </aside>
         </>
     )
