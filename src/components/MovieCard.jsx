@@ -35,10 +35,13 @@ const MovieCard = (props) => {
 
     return (
         <div onClick={toggleModal} className="card-container">
-            <img src={posterUrl} />
             <div className="card-info">
+                <img src={posterUrl} />
                 <div className="title-like-container">
                     <h1 style={{width: '72%'}}>{props.movieTitle}</h1>
+                </div>
+                <h4>Rating: {Number(props.movieRating.toFixed(1))}</h4>
+                <div>
                     <span>
                         Like:
                         <FontAwesomeIcon 
@@ -47,16 +50,15 @@ const MovieCard = (props) => {
                             onClick={handleLike}
                         />
                     </span>
+                    <span>
+                        Watched:
+                        <FontAwesomeIcon 
+                            style={watched || props.isWatched ? {marginLeft: '5px', color: 'green'} : {marginLeft: '5px'}}
+                            icon={watched || props.isWatched ? faSquareCheckSolid : faSquareCheckRegular}
+                            onClick={handleWatch}
+                        />
+                    </span>
                 </div>
-                <h4>Rating: {Number(props.movieRating.toFixed(1))}</h4>
-                <span>
-                    Watched:
-                    <FontAwesomeIcon 
-                        style={watched || props.isWatched ? {marginLeft: '5px', color: 'green'} : {marginLeft: '5px'}}
-                        icon={watched || props.isWatched ? faSquareCheckSolid : faSquareCheckRegular}
-                        onClick={handleWatch}
-                    />
-                </span>
             </div>
         </div>
     )

@@ -11,6 +11,7 @@ const Main = () => {
     const [resetValue, setResetValue] = useState(false)
     const [likedList, setLikedList] = useState([])
     const [watchedList, setWatchedList] = useState([])
+    const [recentSort, setRecentSort] = useState('')
 
     useEffect(() => {
         const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${nowPlayingPageCount + 1}`
@@ -18,6 +19,7 @@ const Main = () => {
             .then(results => {
                 console.log(results)
                 setCurrentMovieList(results)
+                sortMovies(recentSort)
             })
     }, [])
     
@@ -70,6 +72,7 @@ const Main = () => {
                     setPreviousQuery(query)
                     setNowPlayingPageCount(0)
                     setResetValue(true)
+                    sortMovies(recentSort)
                 } else {
                     setCurrentMovieList([...currentMovieList, ...result])
                 }
@@ -110,11 +113,12 @@ const Main = () => {
      */
     const sortMovies = (sortType) => {
         setResetValue(false)
+        setRecentSort(sortType)
         if (sortType === "date") {
             const newList = [...currentMovieList].sort((a, b) => new Date(b.release_date) - new Date(a.release_date))
             setCurrentMovieList(newList)
         } else if (sortType === "alphabetical") {
-            const newList = [...currentMovieList].sort((a, b) => b.title.localeCompare(a.title))
+            const newList = [...currentMovieList].sort((a, b) => a.title.localeCompare(b.title))
             setCurrentMovieList(newList)
         } else if (sortType === "rating") {
             const newList = [...currentMovieList].sort((a, b) => b.vote_average - a.vote_average)

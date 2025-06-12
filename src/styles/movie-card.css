@@ -1,10 +1,9 @@
 .card-container {
     width: 240px;
     min-height: 420px;
-    padding: 5px;
     border: 3px solid black;
     border-radius: 10px;
-    /* box-shadow: 6px 3px 3px #f1ecec; */
+    box-sizing: border-box;
     transition: transform 0.3s ease;
     background-color: #131313;
     color: white;
@@ -15,17 +14,20 @@
 }
 
 .card-container img {
-    width: 240px;
-    height: 355px;
+    width: 100%;
+    aspect-ratio: 2 / 3;
 }
 
 .card-info {
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 5px;
     align-items: flex-start;
     gap: 5px;
+    height: 100%;
+    border: 1px solid red;
 }
 
 .card-info h1 {

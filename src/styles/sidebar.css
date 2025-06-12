@@ -36,6 +36,20 @@
     transform: translateX(0);
 }
 
+.toggle-btn {
+    padding: 5px 6px;
+    margin-left: 10px;
+    transform: scale(2);
+    border-radius: 50%;
+    color: black;
+    background-color: whitesmoke;
+    transition: transform 0.3s;
+}
+
+.toggle-btn:hover {
+    transform: scale(2.1);
+}
+
 
 .sidebar img {
     width: 100px;
