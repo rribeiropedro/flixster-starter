@@ -123,7 +123,7 @@ const MovieList = ({ movieList, addLiked, removeLiked, addWatched, removeWatched
                             addWatched={addWatched}
                             removeWatched={removeWatched}
                             isLiked={likedList.some(element => element.id === item.id)}
-                            isWatched={watchedList.some(element => element.id === item.id)}
+                            isWatched={watchedList.some(element => element.id === item)}
                         />
                     ))}
                 </div>

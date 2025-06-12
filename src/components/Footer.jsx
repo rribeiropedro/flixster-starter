@@ -8,7 +8,7 @@ const Footer = () => {
             justifyContent: 'flex-end',
             alignItems: 'center',
             fontFamily: "'Lato', sans-serif",
-            backgroundColor: '#1772c1',
+            backgroundColor: '#831010',
             color: 'white'
         }}>
             <h1>© 2025 Flixster</h1>

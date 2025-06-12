@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import '../styles/sidebar.css'
 
 const Sidebar = ({likedList, watchedList}) => {
@@ -8,14 +8,16 @@ const Sidebar = ({likedList, watchedList}) => {
 
     return (
         <>
-            <FontAwesomeIcon 
+            <div>
+                <FontAwesomeIcon 
                 className="toggle-btn"
-                icon={faArrowRight}
+                icon={faBars}
                 onClick={() => {
                     setToggleSideBar(true)
                 }}
-            >
-            </FontAwesomeIcon>
+                >
+                </FontAwesomeIcon>
+            </div>
             <div className={`sidebar-overlay ${toggleSideBar ? "open" : ""}`} onClick={() => setToggleSideBar(false)} />
             <aside className={`sidebar ${toggleSideBar ? "open" : ""}`}>
                 <button className="close-btn" onClick={() => setToggleSideBar(false)}>×</button>

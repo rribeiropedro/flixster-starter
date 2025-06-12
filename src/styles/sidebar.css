@@ -36,18 +36,23 @@
     transform: translateX(0);
 }
 
+.header-title {
+    color: whitesmoke;
+    font-size: 50px;
+}
+
 .toggle-btn {
-    padding: 5px 6px;
-    margin-left: 10px;
-    transform: scale(2);
+    top: 4.5%;
+    left: 4.5%;
+    position: absolute;
+    transform: scale(2.5);
     border-radius: 50%;
-    color: black;
-    background-color: whitesmoke;
     transition: transform 0.3s;
+    color: white;
 }
 
 .toggle-btn:hover {
-    transform: scale(2.1);
+    transform: scale(3);
 }
 
 

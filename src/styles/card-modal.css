@@ -74,9 +74,12 @@
 }
 
 .modal-content img {
-    width: 300px;
-    height: 444px;
+    max-width: 300px;
+    width: 100%;
+    max-height: 444px;
+    height: 100%;
     border-radius: 10px;
+    display: block;
 }
 
 .modal-content iframe {
@@ -115,4 +118,29 @@
     font-size: 20px;
     font-weight: 400;
     gap: 5px;
+}
+
+@media(max-width: 1000px) {
+    .modal-content img {
+        max-width: 200px;
+        width: 100%;
+        max-height: 296px;
+        height: 100%;
+    }
+
+    .modal-info h1 {
+        font-size: 20px;
+    }
+
+    .modal-info h3 {
+        font-size: 14px;
+    }
+
+    .modal-genres {
+        font-size: 10px;
+    }
+
+    .modal-info p {
+        font-size: 10px;
+    }
 }

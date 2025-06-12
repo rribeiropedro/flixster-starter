@@ -3,8 +3,7 @@ import MovieList from "./MovieList"
 import Features from "./Features"
 
 const Main = () => {
-    const [queryPageCount, setQueryPageCount] = useState(0)
-    const [nowPlayingPageCount, setNowPlayingPageCount] = useState(0)
+    const [pageCount, setPageCount] = useState(1)
     const [previousQuery, setPreviousQuery] = useState('')
     const [currentMovieList, setCurrentMovieList] = useState()
     const [loading, setLoading] = useState(true)
@@ -14,14 +13,25 @@ const Main = () => {
     const [recentSort, setRecentSort] = useState('')
 
     useEffect(() => {
-        const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${nowPlayingPageCount + 1}`
+        const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageCount}`
         callMovieAPI(nowPlayingURL)
             .then(results => {
-                console.log(results)
                 setCurrentMovieList(results)
-                sortMovies(recentSort)
             })
     }, [])
+
+    useEffect(() => {
+        pageCount > 1 && (previousQuery !== '' ? updateQueryUrl(previousQuery, pageCount) : loadNowPlaying(pageCount))
+    }, [pageCount])
+
+    const uniqueById = (list) => {
+        const seen = new Set()
+        return list.filter(item => {
+            if (seen.has(item.id)) return false
+            seen.add(item.id);
+            return true
+        })
+    }
     
     /**
      * This functions calls the TMDB API for the desired request.
@@ -61,20 +71,18 @@ const Main = () => {
      * @param {*} query - Query from the search bar that is appendeded
      * to the url.
      */
-    const updateQueryUrl = async (query) => {
-        const queryURL = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${queryPageCount + 1}`
-        setQueryPageCount(prev => prev + 1)
+    const updateQueryUrl = async (query, page) => {
+        const queryURL = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`
 
         callMovieAPI(queryURL)
             .then(result => {
-                if (previousQuery === '') {
+                if (page === 1) {
                     setCurrentMovieList(result)
                     setPreviousQuery(query)
-                    setNowPlayingPageCount(0)
                     setResetValue(true)
-                    sortMovies(recentSort)
+                    setPageCount(1)
                 } else {
-                    setCurrentMovieList([...currentMovieList, ...result])
+                    setCurrentMovieList(prev => uniqueById([...prev, ...result]))
                 }
             })
     }
@@ -83,23 +91,18 @@ const Main = () => {
      * This function creates a new url for the Now Playing API call
      * and takes into account the current page state.
      */
-    const loadNowPlaying = async () => {
-        if (previousQuery) {
+    const loadNowPlaying = async (page) => {
+        if (page === 1) {
             setPreviousQuery('')
             setResetValue(true)
+            setPageCount(1)
         }
         
-        const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${nowPlayingPageCount + 1}`
-        setNowPlayingPageCount(prev => prev + 1)
+        const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`
 
         callMovieAPI(nowPlayingURL)
             .then(results => {
-                if (nowPlayingPageCount > 0) {
-                    setCurrentMovieList([...currentMovieList, ...results])
-                } else {
-                    setCurrentMovieList(results)
-                    setQueryPageCount(0)
-                }
+                page > 1 ? setCurrentMovieList(prev => uniqueById([...prev, ...results])) : setCurrentMovieList(results)
             })
     }
 
@@ -126,13 +129,9 @@ const Main = () => {
         }
     }
 
-    const getNextPage = async () => {
-        if (previousQuery != '') {
-            await updateQueryUrl(previousQuery)
-        }
-        else {
-            await loadNowPlaying()
-        }   
+    const clickedClear = () => {
+        setCurrentMovieList()
+        loadNowPlaying(1)
     }
 
     const addLiked = (id, title, poster) => {
@@ -169,7 +168,7 @@ const Main = () => {
                 sortList={sortMovies}
                 resetValue={resetValue}
                 onQuery={updateQueryUrl}
-                onNowButton={loadNowPlaying}
+                clickedClear={clickedClear}
                 likedList={likedList}
                 watchedList={watchedList}
             />
@@ -183,19 +182,23 @@ const Main = () => {
                     likedList={likedList}
                     watchedList={watchedList}
                 /> : []}
-            <button 
-                style={{
-                    padding: '8px 15px',
-                    marginRight: '40px',
-                    color: 'black',
-                    backgroundColor: '#f2f2f2',
-                    borderRadius: '5px',
-                    marginBottom: '30px'
-                }}
-                onClick={getNextPage}
-            >
-                Load More
-            </button>
+            <div style={{width: '100%', backgroundColor: 'black'}}>
+                <button 
+                    style={{
+                        padding: '8px 15px',
+                        marginRight: '40px',
+                        color: 'black',
+                        backgroundColor: '#f2f2f2',
+                        borderRadius: '5px',
+                        marginBottom: '40px'
+                    }}
+                    onClick={() => {
+                        setPageCount(prev => prev + 1)
+                    }}
+                >
+                    Load More
+                </button>
+            </div>
         </div>
     )
 }

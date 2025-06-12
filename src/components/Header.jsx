@@ -3,7 +3,7 @@ import React, { useState } from "react"
 const Header = () => {
     return (
         <header style={{
-            padding: '20px 125px 5px',
+            padding: '20px 160px 5px',
             display: 'flex',
             justifyContent: 'flex-start',
             alignItems: 'flex-start',

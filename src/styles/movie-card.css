@@ -52,3 +52,11 @@
     text-align: left;
     font-size: 20px;
 }
+
+.liked-watched {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}

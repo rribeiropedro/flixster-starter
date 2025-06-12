@@ -41,7 +41,7 @@ const MovieCard = (props) => {
                     <h1 style={{width: '72%'}}>{props.movieTitle}</h1>
                 </div>
                 <h4>Rating: {Number(props.movieRating.toFixed(1))}</h4>
-                <div>
+                <div className="liked-watched">
                     <span>
                         Like:
                         <FontAwesomeIcon 
