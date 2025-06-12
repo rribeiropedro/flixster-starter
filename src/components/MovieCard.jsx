@@ -15,6 +15,14 @@ const MovieCard = (props) => {
         props.displayModalById(props.id)
     }
 
+    /**
+     * This function takes in events to stop propogation and sends 
+     * movie to the Sidebar.jsx component to display the liked movies
+     * list.
+     * 
+     * @param {*} event - Allows us to stop the propogation of
+     * the parent components
+     */
     const handleLike = (event) => {
         event.stopPropagation()
         liked ? props.removeLiked(props.id) : props.addLiked(
@@ -24,6 +32,14 @@ const MovieCard = (props) => {
         setLiked(!liked)
     }
 
+    /**
+     * This function takes in events to stop propogation and sends 
+     * movie to the Sidebar.jsx component to display the watched movies
+     * list.
+     * 
+     * @param {*} event - Allows us to stop the propogation of
+     * the parent components
+     */
     const handleWatch = (event) => {
         event.stopPropagation()
         watched ? props.removeWatched(props.id) : props.addWatched(

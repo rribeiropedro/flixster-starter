@@ -12,6 +12,10 @@ const Main = () => {
     const [watchedList, setWatchedList] = useState([])
     const [recentSort, setRecentSort] = useState('')
 
+    /**
+     * Initial call to the TMDB api, the first page of the
+     * Now PLaying movies are displayed.
+     */
     useEffect(() => {
         const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageCount}`
         callMovieAPI(nowPlayingURL)
@@ -24,6 +28,15 @@ const Main = () => {
         pageCount > 1 && (previousQuery !== '' ? updateQueryUrl(previousQuery, pageCount) : loadNowPlaying(pageCount))
     }, [pageCount])
 
+    /**
+     * This function takes in the list of movies and removes any
+     * repeating movies. The api at times stores duplicate movies
+     * in different pages so this function filters the duplicates out.
+     * 
+     * @param {*} list - The list of movies that will have
+     * any duplicated filtered out
+     * @returns True
+     */
     const uniqueById = (list) => {
         const seen = new Set()
         return list.filter(item => {

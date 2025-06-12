@@ -52,7 +52,7 @@ const Features = ({ sortList, resetValue, onQuery, clickedClear, likedList, watc
                     </button>
                 </div>  
                 <select value={sortValue} onChange={handleSort} className="drop-down">
-                    <option value="" disabled selected>Sort By</option>
+                    <option value="" disabled defaultValue>Sort By</option>
                     <option value="alphabetical">Alphabetical</option>
                     <option value="date">Date</option>
                     <option value="rating">Rating</option>

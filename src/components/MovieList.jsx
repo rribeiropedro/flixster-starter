@@ -33,7 +33,6 @@ const MovieList = ({ movieList, addLiked, removeLiked, addWatched, removeWatched
             .then(res => res.json())
             .then(json => {
                 setModalMovie(json)
-                console.log(json)
                 setDispalyModal(true)
             })
             .catch(error => console.log(error))
