@@ -2,11 +2,11 @@
 
 ## Unit Assignment: Flixster
 
-Submitted by: **NAME**
+Submitted by: **Pedro Rabadan Ribeiro**
 
-Estimated time spent: **#** hours spent in total
+Estimated time spent: **16** hours spent in total
 
-Deployed Application (**required**): [Flixster Deployed Site](ADD_LINK_HERE)
+Deployed Application (**required**): [Flixster Deployed Site](https://flixster-starter-a9ee.onrender.com/)
 
 ### Application Features
 
