@@ -52,7 +52,7 @@ const MovieCard = (props) => {
     return (
         <div onClick={toggleModal} className="card-container">
             <div className="card-info">
-                <img src={posterUrl} />
+                <img alt={props.movieTitle} src={posterUrl} />
                 <div className="title-like-container">
                     <h1 style={{width: '72%'}}>{props.movieTitle}</h1>
                 </div>

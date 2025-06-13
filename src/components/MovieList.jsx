@@ -33,6 +33,7 @@ const MovieList = ({ movieList, addLiked, removeLiked, addWatched, removeWatched
             .then(res => res.json())
             .then(json => {
                 setModalMovie(json)
+                console.log(json)
                 setDispalyModal(true)
             })
             .catch(error => console.log(error))
@@ -92,10 +93,11 @@ const MovieList = ({ movieList, addLiked, removeLiked, addWatched, removeWatched
                                     </button> 
                                 </div> : 
                                 <>
-                                    <img src={`https://image.tmdb.org/t/p/w500${modalMovie.poster_path}`}/>
+                                    <img alt={modalMovie.original_title} src={`https://image.tmdb.org/t/p/w500${modalMovie.poster_path}`}/>
                                     <div className="modal-info">
                                         <h1>{modalMovie.original_title}</h1>
                                         <h3>Release Date: {modalMovie.release_date}</h3>
+                                        <h3>Runtime: {modalMovie.runtime} minutes</h3>
                                         <h4 className="modal-genres"> Genres: {modalMovie.genres.map((genre) => (<span>{genre.name};</span>))}
                                         </h4>
                                         <p>Overview: <br />{modalMovie.overview}</p>
