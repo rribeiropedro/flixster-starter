@@ -102,23 +102,23 @@ Deployed Application (**required**): [Flixster Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
+`TODO://` Add the embedded URL code to your animated app walkthrough below, `https://www.loom.com/share/6362208c405549349e7ee85bd5fbaa77?sid=cbfdf6e1-3328-4ed0-9d66-f37c726f063b`. Make sure the video or gif actually renders and animates when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
 
-`ADD_EMBEDDED_CODE_HERE`
+`https://www.loom.com/share/6362208c405549349e7ee85bd5fbaa77?sid=cbfdf6e1-3328-4ed0-9d66-f37c726f063b`
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+The topics in this assignment really helped us understand how react works. I got a pretty good grasp on why using react is better than vanilla js and started to show in my code how much more efficient it could be with the use of components and state management, all of which were taught pretty well in the labs by the instructors. But for the project, I did feel slightly unprepared to add APIs to the project as that is a topic we brushed over quickly, although eventually we did get to the review section where we properly learned how to use APIs.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+If I had more time on this project, I would try and make the modal more responive that what it currently is. Right now although somewhat responsive, would not look very appealing for most screens. With time, I would find ways to make the modal more responsive without having to use media queries, and instead make it shrink as the screen size decreased.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+I did not demo this week, but from watching my peers present I learned a lot of cool css styling I could apply for my next projects.
 
 ### Open-source libraries used
 
@@ -127,3 +127,5 @@ Add your response here
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+
+Uriel
